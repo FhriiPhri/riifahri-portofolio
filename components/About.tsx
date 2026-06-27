@@ -99,7 +99,7 @@ const skillGroups = [
 
 export default function About() {
   return (
-    <section id="about" className="relative overflow-hidden py-28">
+    <section id="about" className="relative overflow-hidden py-20 sm:py-24 md:py-28">
 
       {/* bg glow */}
       <div className="pointer-events-none absolute -left-40 top-1/3 h-[500px] w-[500px] rounded-full"
@@ -109,19 +109,19 @@ export default function About() {
         style={{ background: "radial-gradient(circle, rgba(230,57,70,0.03) 0%, transparent 70%)", filter: "blur(90px)" }}
       />
 
-      <div className="mx-auto max-w-6xl px-6 md:px-10">
+      <div className="mx-auto max-w-6xl px-5 sm:px-6 md:px-10">
 
         {/* Section label */}
         <motion.div
           initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.5 }}
-          className="mb-16 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400 dark:text-white/25"
+          className="mb-10 flex items-center gap-3 sm:mb-16 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400 dark:text-white/25"
         >
           <span className="h-px w-8 bg-gradient-to-r from-transparent to-slate-300 dark:to-white/25" /> About Me
         </motion.div>
 
         {/* ── Bio row ── */}
-        <div className="mb-20 flex flex-col gap-10 md:flex-row md:gap-14">
+        <div className="mb-16 flex flex-col items-center gap-10 md:mb-20 md:flex-row md:items-start md:gap-14">
           {/* Photo */}
           <motion.div
             initial={{ opacity: 0, scale: 0.88 }}
@@ -133,8 +133,8 @@ export default function About() {
             <motion.div
               whileHover={{ scale: 1.03 }}
               transition={{ type: "spring", stiffness: 200, damping: 22 }}
-              className="relative overflow-hidden rounded-2xl border border-slate-200 dark:border-white/[0.08]"
-              style={{ width: 180, height: 220, boxShadow: "0 24px 60px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.02)" }}
+              className="relative aspect-[9/11] w-44 overflow-hidden rounded-2xl border border-slate-200 dark:border-white/[0.08] sm:w-[180px]"
+              style={{ boxShadow: "0 24px 60px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.02)" }}
             >
               <Image src="/images/profile.jpeg" fill alt="RiiDev" sizes="(max-width:640px) 90vw, 180px" className="object-cover object-top" />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-white/40 dark:from-[#06060f]/50 via-transparent to-transparent" />
@@ -142,7 +142,7 @@ export default function About() {
           </motion.div>
 
           {/* Text */}
-          <div className="flex-1">
+          <div className="w-full flex-1">
             <motion.h2
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.55, delay: 0.1 }}
@@ -180,7 +180,7 @@ export default function About() {
               <motion.p key={i}
                 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
-                className="mb-4 text-sm leading-7 text-slate-550 dark:text-white/40"
+                className="mb-4 text-sm leading-7 text-slate-500 dark:text-white/40"
               >
                 {para}
               </motion.p>
@@ -276,7 +276,7 @@ export default function About() {
                         </span>
                       )}
                     </div>
-                    <p className="mb-0.5 text-[11px] text-slate-550 dark:text-white/40">{exp.role}</p>
+                    <p className="mb-0.5 text-[11px] text-slate-500 dark:text-white/40">{exp.role}</p>
                     <p className="mb-2 text-[10px] text-slate-400 dark:text-white/20">{exp.period}</p>
                     <p className="text-[11px] leading-5 text-slate-500 dark:text-white/30">{exp.desc.slice(0, 82)}…</p>
                   </div>
@@ -320,7 +320,7 @@ export default function About() {
                       viewport={{ once: true }}
                       transition={{ delay: 0.3 + gi * 0.07 + si * 0.04, duration: 0.3 }}
                       whileHover={{ scale: 1.1, y: -2 }}
-                      className="cursor-default rounded-lg border border-slate-200 bg-slate-100/50 px-3 py-1 text-xs font-medium text-slate-650 transition-colors hover:border-[#e63946]/30 hover:text-[#e63946] dark:border-white/[0.07] dark:bg-white/[0.03] dark:text-white/45 dark:hover:border-white/15 dark:hover:text-white/70"
+                      className="cursor-default rounded-lg border border-slate-200 bg-slate-100/50 px-3 py-1 text-xs font-medium text-slate-600 transition-colors hover:border-[#e63946]/30 hover:text-[#e63946] dark:border-white/[0.07] dark:bg-white/[0.03] dark:text-white/45 dark:hover:border-white/15 dark:hover:text-white/70"
                     >
                       {skill}
                     </motion.span>

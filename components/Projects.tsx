@@ -144,7 +144,7 @@ function FeaturedCard({ p, i }: { p: typeof featured[0]; i: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.65, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-      className={`group relative overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br ${p.accent} p-7 dark:border-white/[0.07] md:p-9`}
+      className={`group relative overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br ${p.accent} p-5 dark:border-white/[0.07] sm:p-7 md:p-9`}
     >
       {/* top glow */}
       <div className="pointer-events-none absolute -top-24 left-1/2 h-48 w-60 -translate-x-1/2 rounded-full"
@@ -174,16 +174,16 @@ function FeaturedCard({ p, i }: { p: typeof featured[0]; i: number }) {
               </span>
             ))}
           </div>
-          <div className="flex gap-3">
+          <div className="flex flex-col gap-3 min-[420px]:flex-row min-[420px]:flex-wrap">
             <motion.a whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.96 }}
               href={p.demo} target="_blank" id={`${p.id}-demo`}
-              className="flex items-center gap-2 rounded-xl bg-[#e63946] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_4px_16px_rgba(230,57,70,0.3)] transition hover:bg-[#c1121f] hover:shadow-[0_6px_24px_rgba(230,57,70,0.5)]"
+              className="flex items-center justify-center gap-2 rounded-xl bg-[#e63946] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_4px_16px_rgba(230,57,70,0.3)] transition hover:bg-[#c1121f] hover:shadow-[0_6px_24px_rgba(230,57,70,0.5)]"
             >
               <ExternalLink size={13} /> Live Demo
             </motion.a>
             <motion.a whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.96 }}
               href={p.code} target="_blank" id={`${p.id}-code`}
-              className="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-100/50 px-5 py-2.5 text-sm font-medium text-slate-700 transition hover:border-slate-300 hover:text-slate-950 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/60 dark:hover:border-white/20 dark:hover:text-white"
+              className="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-slate-100/50 px-5 py-2.5 text-sm font-medium text-slate-700 transition hover:border-slate-300 hover:text-slate-950 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/60 dark:hover:border-white/20 dark:hover:text-white"
             >
               <Github size={13} /> Code
             </motion.a>
@@ -198,7 +198,7 @@ function FeaturedCard({ p, i }: { p: typeof featured[0]; i: number }) {
           style={{ boxShadow: "0 24px 64px rgba(0,0,0,0.15)" }}
         >
           <Image src={p.image} width={360} height={220} alt={p.title}
-            className="h-52 w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+            className="h-44 w-full object-cover transition-transform duration-500 group-hover:scale-[1.04] sm:h-52"
           />
         </motion.div>
       </div>
@@ -244,24 +244,24 @@ function OtherCard({ p, i }: { p: typeof others[0]; i: number }) {
 
 export default function Projects() {
   return (
-    <section id="projects" className="relative overflow-hidden py-28">
+    <section id="projects" className="relative overflow-hidden py-20 sm:py-24 md:py-28">
       {/* Subtle background glow */}
       <div className="pointer-events-none absolute right-0 top-1/4 h-[500px] w-[500px] rounded-full"
         style={{ background: "radial-gradient(circle, rgba(230,57,70,0.04) 0%, transparent 70%)", filter: "blur(100px)" }}
       />
 
-      <div className="mx-auto max-w-6xl px-6 md:px-10">
+      <div className="mx-auto max-w-6xl px-5 sm:px-6 md:px-10">
 
         {/* Section label */}
         <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.5 }}
-          className="mb-16 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400 dark:text-white/25"
+          className="mb-10 flex items-center gap-3 sm:mb-16 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400 dark:text-white/25"
         >
           <span className="h-px w-8 bg-gradient-to-r from-transparent to-slate-300 dark:to-white/25" /> Featured Projects
         </motion.div>
 
         {/* Featured */}
-        <div className="mb-24 flex flex-col gap-6">
+        <div className="mb-16 flex flex-col gap-5 sm:mb-24 sm:gap-6">
           {featured.map((p, i) => <FeaturedCard key={p.id} p={p} i={i} />)}
         </div>
 

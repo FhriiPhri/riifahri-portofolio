@@ -26,20 +26,20 @@ const socials = [
 
 export default function Contact() {
   return (
-    <section id="contact" className="relative overflow-hidden py-28">
+    <section id="contact" className="relative overflow-hidden py-20 sm:py-24 md:py-28">
 
       {/* glow bottom center */}
       <div className="pointer-events-none absolute bottom-0 left-1/2 h-[480px] w-[700px] -translate-x-1/2 rounded-full"
         style={{ background: "radial-gradient(ellipse, rgba(230,57,70,0.04) 0%, transparent 75%)", filter: "blur(80px)" }}
       />
 
-      <div className="mx-auto max-w-6xl px-6 md:px-10">
+      <div className="mx-auto max-w-6xl px-5 sm:px-6 md:px-10">
 
         {/* Section label */}
         <motion.div
           initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.5 }}
-          className="mb-16 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400 dark:text-white/25"
+          className="mb-10 flex items-center gap-3 sm:mb-16 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400 dark:text-white/25"
         >
           <span className="h-px w-8 bg-gradient-to-r from-transparent to-slate-300 dark:to-white/25" /> Say Hi
         </motion.div>
@@ -48,7 +48,7 @@ export default function Contact() {
         <motion.div
           initial={{ opacity: 0, y: 48 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-50/50 p-10 dark:border-white/[0.07] dark:bg-white/[0.025] md:p-16"
+          className="relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-50/50 p-6 dark:border-white/[0.07] dark:bg-white/[0.025] sm:p-8 md:p-16"
         >
           {/* decorative orbs inside card */}
           <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full"
@@ -66,7 +66,7 @@ export default function Contact() {
             <motion.h2
               initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-4 font-[Outfit] text-4xl font-black leading-[1.1] text-slate-900 dark:text-white md:text-5xl lg:text-6xl"
+              className="mb-4 font-[Outfit] text-3xl font-black leading-[1.1] text-slate-900 dark:text-white sm:text-4xl md:text-5xl lg:text-6xl"
             >
               Let&apos;s Work{" "}
               <span className="text-[#e63946]">
@@ -98,7 +98,7 @@ export default function Contact() {
                 whileHover={{ scale: 1.03, y: -3 }} whileTap={{ scale: 0.97 }}
                 href="mailto:riiwayatdev@gmail.com"
                 id="contact-email"
-                className="group inline-flex items-center gap-3 rounded-2xl bg-[#e63946] px-7 py-4 text-base font-semibold text-white shadow-[0_6px_32px_rgba(230,57,70,0.35)] transition hover:bg-[#c1121f] hover:shadow-[0_10px_48px_rgba(230,57,70,0.55)]"
+                className="group inline-flex max-w-full flex-wrap items-center justify-center gap-3 rounded-2xl bg-[#e63946] px-5 py-4 text-center text-sm font-semibold text-white sm:px-7 sm:text-base shadow-[0_6px_32px_rgba(230,57,70,0.35)] transition hover:bg-[#c1121f] hover:shadow-[0_10px_48px_rgba(230,57,70,0.55)]"
               >
                 <Mail size={18} />
                 riiwayatdev@gmail.com

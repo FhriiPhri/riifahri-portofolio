@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -15,7 +15,7 @@ export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [open, setOpen] = useState(false);
     const [active, setActive] = useState("");
-    const { theme, setTheme } = useTheme();
+    const { resolvedTheme, setTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
@@ -84,11 +84,11 @@ export default function Navbar() {
                     {/* Theme Toggle */}
                     {mounted && (
                         <button
-                            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                            onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
                             className="ml-2 flex h-9 w-9 items-center justify-center rounded-xl border border-black/10 bg-black/5 text-slate-600 hover:text-slate-900 hover:bg-black/10 dark:border-white/[0.08] dark:bg-white/[0.04] dark:text-white/60 dark:hover:text-white/80 dark:hover:border-white/20 transition-all"
                             aria-label="Toggle Theme"
                         >
-                            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+                            {resolvedTheme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
                         </button>
                     )}
                 </nav>
@@ -98,10 +98,11 @@ export default function Navbar() {
                     {/* Theme Toggle Mobile */}
                     {mounted && (
                         <button
-                            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                            onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
                             className="flex h-9 w-9 items-center justify-center rounded-xl border border-black/10 bg-black/5 text-slate-600 dark:border-white/[0.08] dark:bg-white/[0.04] dark:text-white/60"
+                            aria-label="Toggle Theme"
                         >
-                            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+                            {resolvedTheme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
                         </button>
                     )}
 
@@ -111,6 +112,7 @@ export default function Navbar() {
                         onClick={() => setOpen(!open)}
                         whileTap={{ scale: 0.88 }}
                         className="flex h-9 w-9 items-center justify-center rounded-xl border border-black/10 bg-black/5 text-slate-600 dark:border-white/[0.08] dark:bg-white/[0.04] dark:text-white/60"
+                        aria-label="Toggle navigation"
                     >
                         <AnimatePresence mode="wait" initial={false}>
                             {open
@@ -144,7 +146,7 @@ export default function Navbar() {
                                     {label}
                                 </motion.a>
                             ))}
-                            <motion.a href="/resume.pdf" target="_blank"
+                            <motion.a href="/CV.pdf" target="_blank"
                                 initial={{ opacity: 0, x: -12 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: links.length * 0.06 }}
