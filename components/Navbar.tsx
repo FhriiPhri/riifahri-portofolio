@@ -48,7 +48,7 @@ export default function Navbar() {
             <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 md:px-10">
                 {/* Logo */}
                 <a href="/" className="font-[Outfit] text-xl font-black tracking-tight text-slate-900 dark:text-white">
-                    <span className="text-[#e63946]">RiiDev</span>
+                    <span className="text-[#e63946]">RiiFahri</span>
                 </a>
 
                 {/* Desktop nav */}

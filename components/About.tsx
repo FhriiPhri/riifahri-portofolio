@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { GraduationCap, Briefcase, Code2, Zap } from "lucide-react";
+import { GraduationCap, Briefcase, Code2, Zap, Volume2 } from "lucide-react";
+import { useCallback, useState } from "react";
 
 /* ─ DATA ─────────────────────────────────────────── */
 
@@ -95,9 +96,45 @@ const skillGroups = [
   },
 ];
 
+const bioParas = [
+  <>
+    Saya merupakan lulusan <strong>SMK Taruna Bhakti</strong> jurusan
+    komputer dan informatika dengan pengalaman magang sebagai
+    <strong> Quality Assurance </strong>dan
+    <strong> Web Developer </strong>di IMP Studio Indonesia.
+  </>,
+  <>
+    Saya memiliki pengalaman dalam pengembangan aplikasi
+    menggunakan <strong>Laravel</strong>,
+    <strong> Flutter</strong>,
+    <strong> React</strong>,
+    serta software testing dan quality assurance.
+  </>,
+  <>
+    Selain pengembangan web, saya juga mengembangkan game
+    menggunakan <strong>Unity</strong> yang telah dipamerkan
+    sebanyak <strong>3 kali</strong> pada pameran sekolah.
+  </>,
+];
+
 /* ─ COMPONENT ─────────────────────────────────────── */
 
 export default function About() {
+  const [isSpeaking, setIsSpeaking] = useState(false);
+
+  const speakName = useCallback(() => {
+    if (typeof window === "undefined" || !window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance("Fahri");
+    utterance.lang = "id-ID";
+    utterance.rate = 0.85;
+    utterance.pitch = 1;
+    utterance.onstart = () => setIsSpeaking(true);
+    utterance.onend = () => setIsSpeaking(false);
+    utterance.onerror = () => setIsSpeaking(false);
+    window.speechSynthesis.speak(utterance);
+  }, []);
+
   return (
     <section id="about" className="relative overflow-hidden py-20 sm:py-24 md:py-28">
 
@@ -131,13 +168,15 @@ export default function About() {
             className="flex-shrink-0"
           >
             <motion.div
-              whileHover={{ scale: 1.03 }}
+              whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 200, damping: 22 }}
-              className="relative aspect-[9/11] w-44 overflow-hidden rounded-2xl border border-slate-200 dark:border-white/[0.08] sm:w-[180px]"
+              className="relative h-44 w-44 overflow-hidden rounded-full border-2 border-slate-200 dark:border-white/[0.08] sm:h-[180px] sm:w-[180px]"
               style={{ boxShadow: "0 24px 60px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.02)" }}
             >
-              <Image src="/images/profile.jpeg" fill alt="RiiDev" sizes="(max-width:640px) 90vw, 180px" className="object-cover object-top" />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-white/40 dark:from-[#06060f]/50 via-transparent to-transparent" />
+              <Image src="/images/profile.jpeg" width={180} height={180} alt="RiiDev"
+                className="h-full w-full object-cover object-top" unoptimized
+              />
+              <div className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-t from-black/15 via-transparent to-transparent" />
             </motion.div>
           </motion.div>
 
@@ -148,35 +187,39 @@ export default function About() {
               viewport={{ once: true }} transition={{ duration: 0.55, delay: 0.1 }}
               className="mb-1 font-[Outfit] text-2xl font-bold text-slate-900 dark:text-white md:text-3xl"
             >
-              Muhammad RiiDev
+              Muhammad Fahri Ramadhan
             </motion.h2>
-            <motion.p
+            <motion.div
               initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.15 }}
-              className="mb-5 text-xs text-slate-400 dark:text-white/20"
+              className="mb-5"
             >
-              /Rii/ 🔊
-            </motion.p>
+              <button
+                onClick={speakName}
+                className="group/speak inline-flex items-center gap-2 rounded-lg px-2 py-1 -ml-2 text-xs text-slate-400 dark:text-white/30 transition-all hover:bg-[#e63946]/10 hover:text-[#e63946] dark:hover:text-[#e63946] cursor-pointer"
+                aria-label="Pronounce name: Fahri"
+                type="button"
+              >
+                <span className="font-mono">/fah·ri/</span>
+                <Volume2
+                  size={14}
+                  className={`transition-all ${isSpeaking ? "text-[#e63946] scale-110" : "group-hover/speak:scale-110"}`}
+                />
+                {isSpeaking && (
+                  <span className="flex gap-0.5">
+                    {[0, 1, 2].map((i) => (
+                      <span
+                        key={i}
+                        className="inline-block h-2 w-0.5 rounded-full bg-[#e63946]"
+                        style={{ animation: `soundbar 0.6s ease-in-out ${i * 0.15}s infinite alternate` }}
+                      />
+                    ))}
+                  </span>
+                )}
+              </button>
+            </motion.div>
 
-            {[
-              <><>
-                Saya merupakan lulusan <strong>SMK Taruna Bhakti</strong>
-                jurusankomputer dan informatika
-                dengan pengalaman magang sebagai
-                <strong> Quality Assurance </strong>dan
-                <strong> Web Developer </strong>di IMP Studio Indonesia.
-              </><>
-                  Saya memiliki pengalaman dalam pengembangan aplikasi
-                  menggunakan <strong>Laravel</strong>,
-                  <strong> Flutter</strong>,
-                  <strong> React</strong>,
-                  serta software testing dan quality assurance.
-                </><>
-                  Selain pengembangan web, saya juga mengembangkan game
-                  menggunakan <strong>Unity</strong> yang telah dipamerkan
-                  sebanyak <strong>3 kali</strong> pada pameran sekolah.
-                </></>
-            ].map((para, i) => (
+            {bioParas.map((para, i) => (
               <motion.p key={i}
                 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
@@ -199,7 +242,7 @@ export default function About() {
               whileHover={{ y: -6, scale: 1.04 }}
               className="flex flex-col items-center justify-center rounded-2xl border border-slate-200 bg-slate-50/50 py-7 text-center backdrop-blur-sm dark:border-white/[0.07] dark:bg-white/[0.03]"
             >
-              <span className="mb-1 font-[Outfit] text-4xl font-black text-[#e63946]">
+              <span className="mb-1 font-[Outfit] text-4xl font-black bg-gradient-to-r from-[#e63946] to-[#ff6b6b] bg-clip-text text-transparent">
                 {s.value}
               </span>
               <span className="text-[11px] text-slate-400 dark:text-white/30">{s.label}</span>
@@ -227,7 +270,7 @@ export default function About() {
               <p className="mb-0.5 text-xs text-slate-500 dark:text-white/50">Teknik Perangkat Lunak dan Pengembangan Game</p>
               <p className="mb-4 text-[11px] text-slate-400 dark:text-white/25">Jul 2023 – Jun 2026</p>
               <span className="inline-flex items-center gap-1.5 rounded-lg border border-[#e63946]/20 bg-[#e63946]/10 px-3 py-1.5 text-xs font-semibold text-[#e63946]">
-                ✨ Nilai Akhir 84.95 / 100
+                Nilai Akhir 84.95 / 100
               </span>
             </div>
           </motion.div>
@@ -278,7 +321,7 @@ export default function About() {
                     </div>
                     <p className="mb-0.5 text-[11px] text-slate-500 dark:text-white/40">{exp.role}</p>
                     <p className="mb-2 text-[10px] text-slate-400 dark:text-white/20">{exp.period}</p>
-                    <p className="text-[11px] leading-5 text-slate-500 dark:text-white/30">{exp.desc.slice(0, 82)}…</p>
+                    <p className="text-[11px] leading-5 text-slate-500 dark:text-white/30">{exp.desc}</p>
                   </div>
                 </motion.div>
               ))}

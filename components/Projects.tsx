@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ExternalLink, Github, Layers } from "lucide-react";
+import { ExternalLink, Github, Layers, ImageOff } from "lucide-react";
 import Image from "next/image";
+import { useState } from "react";
 
 const featured = [
   {
@@ -14,9 +15,9 @@ const featured = [
     image: "/images/MIDDLE.png",
     demo: "#",
     code: "#",
-    accent: "from-blue-500/5 to-blue-600/5",
-    glow: "rgba(59,130,246,.15)",
-    dot: "#3b82f6",
+    accent: "from-red-500/5 to-orange-500/5",
+    glow: "rgba(230,57,70,.15)",
+    dot: "#e63946",
   },
 
   {
@@ -28,9 +29,9 @@ const featured = [
     image: "/images/DND.png",
     demo: "#",
     code: "#",
-    accent: "from-blue-500/5 to-blue-600/5",
-    glow: "rgba(59,130,246,.15)",
-    dot: "#3b82f6",
+    accent: "from-purple-500/5 to-blue-500/5",
+    glow: "rgba(139,92,246,.15)",
+    dot: "#8b5cf6",
   },
 
   {
@@ -42,7 +43,7 @@ const featured = [
     image: "/images/projects/sispemtb.png",
     demo: "#",
     code: "#",
-    accent: "from-blue-500/5 to-blue-600/5",
+    accent: "from-blue-500/5 to-cyan-500/5",
     glow: "rgba(59,130,246,.15)",
     dot: "#3b82f6",
   },
@@ -56,9 +57,9 @@ const featured = [
     image: "/images/projects/overlay.png",
     demo: "#",
     code: "https://github.com/RiiDev/overlay-kajian-islam",
-    accent: "from-blue-500/5 to-blue-600/5",
-    glow: "rgba(59,130,246,.15)",
-    dot: "#3b82f6",
+    accent: "from-emerald-500/5 to-teal-500/5",
+    glow: "rgba(16,185,129,.15)",
+    dot: "#10b981",
   },
 
   {
@@ -70,9 +71,9 @@ const featured = [
     image: "/images/projects/web-masjid.png",
     demo: "#",
     code: "https://github.com/RiiDev/web-masjid",
-    accent: "from-blue-500/5 to-blue-600/5",
-    glow: "rgba(59,130,246,.15)",
-    dot: "#3b82f6",
+    accent: "from-amber-500/5 to-yellow-500/5",
+    glow: "rgba(245,158,11,.15)",
+    dot: "#f59e0b",
   },
 
   {
@@ -84,9 +85,9 @@ const featured = [
     image: "/images/projects/xthreads.png",
     demo: "#",
     code: "https://github.com/RiiDev/xthreads-mobile",
-    accent: "from-blue-500/5 to-blue-600/5",
-    glow: "rgba(59,130,246,.15)",
-    dot: "#3b82f6",
+    accent: "from-sky-500/5 to-indigo-500/5",
+    glow: "rgba(14,165,233,.15)",
+    dot: "#0ea5e9",
   },
 ];
 
@@ -135,6 +136,31 @@ const others = [
   },
 ];
 
+function ProjectImage({ src, alt, dot }: { src: string; alt: string; dot: string }) {
+  const [error, setError] = useState(false);
+
+  if (error) {
+    return (
+      <div
+        className="flex h-44 w-full flex-col items-center justify-center gap-2 sm:h-52"
+        style={{ background: `linear-gradient(135deg, ${dot}15, ${dot}05)` }}
+      >
+        <ImageOff size={32} style={{ color: dot }} className="opacity-40" />
+        <span className="text-xs font-medium opacity-30" style={{ color: dot }}>Coming Soon</span>
+      </div>
+    );
+  }
+
+  return (
+    <Image
+      src={src} width={360} height={220} alt={alt}
+      className="h-44 w-full object-cover transition-transform duration-500 group-hover:scale-[1.04] sm:h-52"
+      onError={() => setError(true)}
+      unoptimized
+    />
+  );
+}
+
 function FeaturedCard({ p, i }: { p: typeof featured[0]; i: number }) {
   const flip = i % 2 === 1;
   return (
@@ -175,18 +201,27 @@ function FeaturedCard({ p, i }: { p: typeof featured[0]; i: number }) {
             ))}
           </div>
           <div className="flex flex-col gap-3 min-[420px]:flex-row min-[420px]:flex-wrap">
-            <motion.a whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.96 }}
-              href={p.demo} target="_blank" id={`${p.id}-demo`}
-              className="flex items-center justify-center gap-2 rounded-xl bg-[#e63946] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_4px_16px_rgba(230,57,70,0.3)] transition hover:bg-[#c1121f] hover:shadow-[0_6px_24px_rgba(230,57,70,0.5)]"
-            >
-              <ExternalLink size={13} /> Live Demo
-            </motion.a>
-            <motion.a whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.96 }}
-              href={p.code} target="_blank" id={`${p.id}-code`}
-              className="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-slate-100/50 px-5 py-2.5 text-sm font-medium text-slate-700 transition hover:border-slate-300 hover:text-slate-950 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/60 dark:hover:border-white/20 dark:hover:text-white"
-            >
-              <Github size={13} /> Code
-            </motion.a>
+            {p.demo !== "#" && (
+              <motion.a whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.96 }}
+                href={p.demo} target="_blank" id={`${p.id}-demo`}
+                className="flex items-center justify-center gap-2 rounded-xl bg-[#e63946] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_4px_16px_rgba(230,57,70,0.3)] transition hover:bg-[#c1121f] hover:shadow-[0_6px_24px_rgba(230,57,70,0.5)]"
+              >
+                <ExternalLink size={13} /> Live Demo
+              </motion.a>
+            )}
+            {p.code !== "#" && (
+              <motion.a whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.96 }}
+                href={p.code} target="_blank" id={`${p.id}-code`}
+                className="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-slate-100/50 px-5 py-2.5 text-sm font-medium text-slate-700 transition hover:border-slate-300 hover:text-slate-950 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/60 dark:hover:border-white/20 dark:hover:text-white"
+              >
+                <Github size={13} /> Code
+              </motion.a>
+            )}
+            {p.demo === "#" && p.code === "#" && (
+              <span className="inline-flex items-center gap-2 rounded-xl border border-slate-200/50 bg-slate-100/30 px-5 py-2.5 text-sm font-medium text-slate-400 dark:border-white/[0.05] dark:bg-white/[0.02] dark:text-white/25">
+                Coming Soon
+              </span>
+            )}
           </div>
         </div>
 
@@ -197,9 +232,7 @@ function FeaturedCard({ p, i }: { p: typeof featured[0]; i: number }) {
           className="w-full overflow-hidden rounded-xl border border-slate-200 dark:border-white/[0.08] md:w-[320px] lg:w-[360px]"
           style={{ boxShadow: "0 24px 64px rgba(0,0,0,0.15)" }}
         >
-          <Image src={p.image} width={360} height={220} alt={p.title}
-            className="h-44 w-full object-cover transition-transform duration-500 group-hover:scale-[1.04] sm:h-52"
-          />
+          <ProjectImage src={p.image} alt={p.title} dot={p.dot} />
         </motion.div>
       </div>
     </motion.div>
@@ -222,11 +255,6 @@ function OtherCard({ p, i }: { p: typeof others[0]; i: number }) {
       <div>
         <div className="mb-4 flex items-start justify-between">
           <span className="text-3xl">{p.emoji}</span>
-          <a href="#" id={`${p.id}-link`}
-            className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-slate-100/50 text-slate-400 opacity-0 transition-all duration-200 group-hover:opacity-100 group-hover:text-slate-700 dark:border-white/[0.07] dark:bg-white/[0.03] dark:text-white/30 dark:group-hover:text-white/70"
-          >
-            <ExternalLink size={13} />
-          </a>
         </div>
         <h4 className="mb-2 text-sm font-semibold text-slate-900 dark:text-white">{p.title}</h4>
         <p className="text-[13px] leading-6 text-slate-500 dark:text-white/35">{p.desc}</p>
@@ -274,7 +302,7 @@ export default function Projects() {
         </motion.div>
 
         {/* Other grid */}
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {others.map((p, i) => <OtherCard key={p.id} p={p} i={i} />)}
         </div>
       </div>

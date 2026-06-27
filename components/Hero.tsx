@@ -61,9 +61,9 @@ export default function Hero() {
                             className="mb-4 font-[Outfit] text-4xl font-black leading-[1.05] tracking-tight text-slate-900 dark:text-white min-[380px]:text-5xl sm:text-6xl lg:text-7xl"
                         >
                             Hello, I&apos;m{" "}
-                            <span className="block">Muhammad</span>
-                            <span className="block text-[#e63946]">
-                                RiiDev.
+                            <span className="block">Muhammad Fahri</span>
+                            <span className="block bg-gradient-to-r from-[#e63946] to-[#ff6b6b] bg-clip-text text-transparent">
+                                Ramadhan.
                             </span>
                         </motion.h1>
 
@@ -147,26 +147,29 @@ export default function Hero() {
                         initial={{ opacity: 0, scale: 0.88, x: 30 }}
                         animate={{ opacity: 1, scale: 1, x: 0 }}
                         transition={{ duration: 0.85, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                        className="relative w-full max-w-[296px] flex-shrink-0 sm:max-w-[320px] md:w-auto"
+                        className="relative w-full max-w-[280px] flex-shrink-0 sm:max-w-[300px] md:w-auto"
                     >
                         {/* glow halo */}
                         <div
-                            className="absolute -inset-8 rounded-[36px] opacity-40 dark:opacity-60"
-                            style={{ background: "radial-gradient(circle, rgba(230,57,70,0.3) 0%, transparent 70%)", filter: "blur(35px)" }}
+                            className="absolute -inset-10 rounded-full opacity-50 dark:opacity-70"
+                            style={{ background: "radial-gradient(circle, rgba(230,57,70,0.25) 0%, transparent 65%)", filter: "blur(40px)" }}
                         />
+
+                        {/* animated ring */}
+                        <div className="absolute -inset-[3px] z-10 rounded-full bg-gradient-to-br from-[#e63946] via-[#ff6b6b] to-[#e63946] opacity-60 dark:opacity-80 animate-[spin_8s_linear_infinite]" />
+                        <div className="absolute -inset-[1px] z-10 rounded-full bg-white dark:bg-[#06060f]" />
 
                         {/* photo frame */}
                         <motion.div
-                            whileHover={{ scale: 1.03 }}
+                            whileHover={{ scale: 1.04 }}
                             transition={{ type: "spring", stiffness: 200, damping: 22 }}
-                            className="relative z-10 aspect-[37/45] w-full overflow-hidden rounded-[28px] border border-black/10 dark:border-white/[0.1]"
-                            style={{ boxShadow: "0 40px 100px rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.06)" }}
+                            className="relative z-20 aspect-square w-full overflow-hidden rounded-full border-2 border-white/20 dark:border-white/[0.08]"
+                            style={{ boxShadow: "0 40px 100px rgba(0,0,0,0.25), 0 0 0 1px rgba(0,0,0,0.06)" }}
                         >
-                            <Image src="/images/profile.jpeg" fill alt="Muhammad RiiDev"
-                                sizes="(max-width: 640px) 90vw, 320px"
-                                className="object-cover object-top transition-transform duration-700 group-hover:scale-105" priority
+                            <Image src="/images/profile.jpeg" width={300} height={300} alt="Muhammad RiiDev"
+                                className="h-full w-full object-cover object-top" priority unoptimized
                             />
-                            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-white/40 dark:from-[#06060f]/60 via-transparent to-transparent" />
+                            <div className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-t from-black/20 via-transparent to-white/5" />
                         </motion.div>
 
                         {/* Floating chip — top right */}
@@ -174,7 +177,7 @@ export default function Hero() {
                             initial={{ opacity: 0, y: -12 }}
                             animate={{ opacity: 1, y: [0, -7, 0] }}
                             transition={{ delay: 1.1, duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
-                            className="absolute -right-2 -top-5 z-20 sm:-right-5 flex items-center gap-2 rounded-2xl border border-black/10 bg-white/90 dark:border-white/10 dark:bg-[#0e0e1c]/90 px-3 py-2 text-xs font-medium text-slate-700 dark:text-white/80 shadow-xl backdrop-blur-xl"
+                            className="absolute -right-4 top-2 z-30 sm:-right-8 flex items-center gap-2 rounded-2xl border border-black/10 bg-white/90 dark:border-white/10 dark:bg-[#0e0e1c]/90 px-3 py-2 text-xs font-medium text-slate-700 dark:text-white/80 shadow-xl backdrop-blur-xl"
                         >
                             🎮 Game Dev
                         </motion.div>
@@ -184,7 +187,7 @@ export default function Hero() {
                             initial={{ opacity: 0, y: 12 }}
                             animate={{ opacity: 1, y: [0, 7, 0] }}
                             transition={{ delay: 1.4, duration: 3.6, repeat: Infinity, ease: "easeInOut" }}
-                            className="absolute -bottom-5 -left-2 z-20 sm:-left-5 flex items-center gap-2 rounded-2xl border border-black/10 bg-white/90 dark:border-white/10 dark:bg-[#0e0e1c]/90 px-3 py-2 text-xs font-medium text-slate-700 dark:text-white/80 shadow-xl backdrop-blur-xl"
+                            className="absolute -left-4 bottom-2 z-30 sm:-left-8 flex items-center gap-2 rounded-2xl border border-black/10 bg-white/90 dark:border-white/10 dark:bg-[#0e0e1c]/90 px-3 py-2 text-xs font-medium text-slate-700 dark:text-white/80 shadow-xl backdrop-blur-xl"
                         >
                             💼 Open to Work
                         </motion.div>
